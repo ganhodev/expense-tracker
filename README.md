@@ -1,57 +1,76 @@
-﻿💸 Controle de Gastos — Gerenciador Financeiro em C#
-Aplicação de console desenvolvida em C# como projeto de aprendizado, evoluindo os conceitos do projeto anterior (TodoList) com novos tipos de dados, LINQ e lógica financeira.
+# 💸 Controle de Gastos — Gerenciador Financeiro em C#
 
-💡 Sobre o projeto
-O Controle de Gastos permite registrar despesas com nome, valor e categoria, acompanhar o estado de pagamento de cada uma e visualizar o total gasto. Tudo rodando no terminal com um menu interativo.
-Este projeto foi desenvolvido como segunda etapa da jornada de aprendizado em .NET — a próxima versão terá persistência em banco de dados com Entity Framework Core.
+Projeto de aprendizado em .NET, evoluindo de uma aplicação console simples para uma **API REST** com arquitetura em camadas e validação de regras de negócio.
 
-⚙️ Funcionalidades
+## 💡 Sobre o projeto
 
-➕ Adicionar despesa com nome, valor e categoria
-📋 Listar despesas com estado de pagamento
-✔️ Marcar despesa como paga
-🗑️ Remover despesa por ID
-💰 Calcular total gasto
-🔍 Filtrar despesas por categoria
+O Controle de Gastos permite registrar despesas com descrição, valor, categoria e data, além de listar, filtrar e remover gastos. A versão atual (v3) expõe essas operações via API REST, com validação automática das regras de negócio usando FluentValidation.
 
+## 🏗️ Arquitetura
 
-🛠️ Tecnologias utilizadas
+O projeto segue uma separação em camadas:
 
-C#
-.NET 10
-Console Application
-LINQ (Where, Sum)
-
-
-🏗️ Estrutura do projeto
+```
 ControleDeGastos/
-├── Despesa.cs           # Modelo da despesa com ID automático e DateTime
-├── DespesaService.cs    # Lógica de negócio (CRUD + filtros com LINQ)
-└── Program.cs           # Menu interativo no terminal
+├── Domain/         # Entidades (Gasto)
+├── Repository/      # Persistência em memória
+├── Services/        # Regras de negócio e orquestração
+├── Validator/       # Regras de validação com FluentValidation
+└── Controllers/     # Endpoints HTTP (API REST)
+```
 
-▶️ Como rodar
+## ⚙️ Funcionalidades
+
+- ➕ Adicionar gasto com descrição, valor, categoria e data
+- ✅ Validação automática (valor positivo, descrição mínima, categoria válida, data não futura)
+- 📋 Listar todos os gastos
+- 🗑️ Remover gasto por ID
+- 🔍 Totais agrupados por categoria (LINQ)
+
+## 🛠️ Tecnologias utilizadas
+
+- C# / .NET 10
+- ASP.NET Core Web API
+- FluentValidation
+- LINQ
+- Swagger (documentação automática de endpoints)
+
+## ▶️ Como rodar
+
 Pré-requisitos: .NET 10 SDK instalado.
-bash# Clone o repositório
-git clone https://github.com/ganhodev/controle-de-gastos.git
 
-# Entre na pasta
-cd controle-de-gastos
-
-# Rode o projeto
+```bash
+git clone https://github.com/ganhodev/expense-tracker.git
+cd expense-tracker
+dotnet restore
 dotnet run
+```
 
-📚 O que aprendi neste projeto
+A documentação dos endpoints fica disponível via Swagger ao rodar o projeto localmente.
 
-Uso do tipo decimal para valores monetários
-Uso do DateTime.Now para registro automático de data
-Filtros com LINQ usando Where() e ToLower() para comparação sem distinção de maiúsculas
-Cálculo de totais com Sum()
-Escopo de variáveis dentro do switch com chaves {}
-Uso de TryParse para evitar travamento por entrada inválida
+## 📚 Histórico de versões
 
+| Versão | Descrição | Status |
+|--------|-----------|--------|
+| v1.0 | Aplicação console com CRUD em memória e LINQ | ✅ Concluído |
+| v2.0 | Persistência com Entity Framework Core | 🔜 Planejado |
+| v3.0 | API REST com ASP.NET Core, arquitetura em camadas e FluentValidation | ✅ Concluído |
 
-🔜 Próximas versões
-VersãoDescriçãov2.0Persistência com banco de dados usando Entity Framework Corev3.0API REST com ASP.NET Core e Swagger
+## 📚 O que aprendi neste projeto
 
-👨‍💻 Autor
-Desenvolvido como parte da jornada de aprendizado em .NET — rumo ao projeto Zona Vermelha.
+- Migração de aplicação console para API REST
+- Separação de responsabilidades em camadas (Domain, Repository, Service, Controller)
+- Validação de regras de negócio com FluentValidation
+- Injeção de dependência via construtor (primary constructors do C# 12)
+- Tratamento de exceções e retorno de status HTTP apropriados
+- Fluxo de branches no Git para evoluir um projeto existente sem quebrar a versão estável
+
+## 🔜 Próximos passos
+
+- Persistência com Entity Framework Core + SQLite
+- Testes unitários com xUnit
+- Frontend em Angular consumindo a API
+
+## 👨‍💻 Autor
+
+Desenvolvido como parte da jornada de aprendizado em .NET
