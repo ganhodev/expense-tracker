@@ -1,14 +1,12 @@
 ﻿namespace ControleDeGastos.Controllers;
 
-using ControleDeGastos.API.Domain;
-using ControleDeGastos.API.Services;
+using ControleDeGastos.Domain;
+using ControleDeGastos.Services;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 
-namespace ControleDeGastos.API.Controllers;
-
-    [ApiController]
-    [Route("api/gastos")]
+[ApiController]
+[Route("api/gastos")]
 public class GastosController(GastoService gastoService) : ControllerBase
 {
     [HttpPost]
@@ -16,10 +14,10 @@ public class GastosController(GastoService gastoService) : ControllerBase
     {
         try
         {
-        gastoService.Adicionar(gasto);
-        return Ok();
+            gastoService.Adicionar(gasto);
+            return Ok();
         }
-        catch(ValidationException ex)
+        catch (ValidationException ex)
         {
             return BadRequest(ex.Errors);
         }

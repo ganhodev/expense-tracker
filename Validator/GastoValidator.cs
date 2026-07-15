@@ -1,8 +1,8 @@
 ﻿namespace ControleDeGastos.Validator;
 
-using ControleDeGastos.API.Domain;
+using ControleDeGastos.Domain;
 using FluentValidation;
-using global::ControleDeGastos.Domain;
+
 public class GastoValidator : AbstractValidator<Gasto>
 {
     public GastoValidator()
