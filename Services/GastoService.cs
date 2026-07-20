@@ -25,4 +25,15 @@ public class GastoService
 
         _gastoRepository.Adicionar(gasto);
     }
+
+    public List<Gasto> ListarTodos() => _gastoRepository.ListarTodos();
+
+    public void Remover(Guid id) => _gastoRepository.Remover(id);
+
+    public Dictionary<string, decimal> TotalPorCategoria()
+    {
+        return _gastoRepository.ListarTodos().GroupBy(c => c.Categoria)
+            .ToDictionary
+            (grupo => grupo.Key, grupo => grupo.Sum(gasto => gasto.Valor));
+    }
 }

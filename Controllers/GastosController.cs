@@ -22,4 +22,27 @@ public class GastosController(GastoService gastoService) : ControllerBase
             return BadRequest(ex.Errors);
         }
     }
+
+    [HttpGet]
+    public IActionResult ListarTodos()
+    {
+        var gastos = gastoService.ListarTodos();
+        return Ok(gastos);
+    }
+
+    [HttpGet]
+    [Route("api/total-por-categoria")]
+    public IActionResult TotalPorCategoria()
+    {
+        var totais = gastoService.TotalPorCategoria();
+        return Ok(totais);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public IActionResult Remover(Guid id)
+    {
+        gastoService.Remover(id);
+        return NoContent();
+    }
 }
