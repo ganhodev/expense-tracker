@@ -3,5 +3,6 @@
     <File Path=".gitignore" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="../ControleDeGastos.Tests/ControleDeGastos.Tests.csproj" Id="7bef6ac4-42b1-4af1-b1f6-fefbafb3eaf8" />
   <Project Path="ControleDeGastos.csproj" />
 </Solution>
